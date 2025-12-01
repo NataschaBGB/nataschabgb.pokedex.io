@@ -62,16 +62,13 @@ const pokemonsDiv = wrapper.querySelector(".pokemons")
 
 // DISPLAY POKEMONS
 function details(data) {
-    
-    // console.log(data);
-    // console.log(data.id);
-    
 
     // create figure html to display pokemon in html
     const pokemonTemplate = /*html*/`
         <figure>
+            <a href="index.html">Back</a>
             <h1>${data.name}</h1>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${data.id}.gif">
         </figure>`
 
     // insert figure in pokemons div selected earlier
@@ -92,6 +89,7 @@ wrapper.insertAdjacentHTML("beforeend", createFooterDiv)
 // get footer div in html
 const footerDiv = document.querySelector(".pokemons-footer")
 
+// FILL PROGRESS/METER BAR OF EACH STAT WHEN PAGE LOADS
 function footer(data) {
 
     const details = /*html*/`

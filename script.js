@@ -12,19 +12,36 @@ async function fetchPokemons(offset, limit) {
     newUrl = `${url}?offset=${offset}&limit=${limit}`
 
     try {
-        // get the newly constructed url
-        const response = await fetch(newUrl)
-        // convert the fetched data to json
-        const data = await response.json()        
+
+        fetch(newUrl)
+        .then((response) => 
+            response.json()
+        )
+        .then((data) => {
+            // call function to display header
+            header()
+            // function to get pokemons data
+            getPokemons(data)
+            console.log(data);
+            
+            
+            // function to display page nunmber
+            // const {currentPage, totalPages} = getPageNumber(offset, limit, data.count)
+        })
+
+
+        // // get the newly constructed url
+        // const response = await fetch(newUrl)
+        // // convert the fetched data to json
+        // const data = await response.json()        
         
-        // call function to display header
-        header()
-        // function to get pokemons data
-        getPokemons(data)
+        // // call function to display header
+        // header()
+        // // function to get pokemons data
+        // getPokemons(data)
         
         // function to display page nunmber
         // const {currentPage, totalPages} = getPageNumber(offset, limit, data.count)
-        // console.log(currentPage, totalPages);
     }
     catch (error) {
         console.log("Error fetching pokémon data:", error.message);
@@ -115,12 +132,12 @@ function getPokemons(data) {
         const imgId = result.url.slice(0, -1).split("/").pop();
         
         // set img src link with the extracted id
-        const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${imgId}.png`
+        const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/${imgId}.gif`
 
         // create figure html to display pokemon in html
         const pokemonTemplate = /*html*/`
             <figure>
-                <a href="details.html?name=${result.name}" target="_blank">
+                <a href="details.html?name=${result.name}">
                     <img src="${imgSrc}" alt="${result.name}">
                     <figcaption>
                         ${result.name.charAt(0).toUpperCase() + result.name.slice(1)}
@@ -326,8 +343,8 @@ function handleSearchInput(event) {
         // create figure html to display pokemon in html
         const pokemonTemplate = /*html*/`
             <figure>
-                <a href="details.html?name=${data.name}" target="_blank">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png" alt="${data.name}">
+                <a href="details.html?name=${data.name}">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/${data.id}.gif" alt="${data.name}">
                     <figcaption>
                         ${data.name.charAt(0).toUpperCase() + data.name.slice(1)}
                     </figcaption>
